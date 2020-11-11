@@ -8,7 +8,7 @@ const ExpressError = require('./utils/ExpressError');
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const geocoder = mbxGeocoding({ accessToken: 'pk.eyJ1IjoicGF0cmF3aSIsImEiOiJja2d4b2tsMG4wNW5wMnNxdmdpcTdpYXdyIn0.8Czahd6OMIWbV7J6iNCv0w'});
 const bodyParser = require('body-parser')
-mongoose.connect('mongodb+srv://usertest:VTAFqNqnUk5nF8EL@cluster0.jodck.mongodb.net/Station?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://usertest:<password>@cluster0.jodck.mongodb.net/Station?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 app.get('/map',  (req, res) => {
-    res.render('Map/Show') 
+    res.render('Map/Show')
 });
 
 const validateReview = (req, res, next) => {
@@ -50,7 +50,7 @@ const validateReview = (req, res, next) => {
 }
 
 app.get('/map/sukhumvit', async (req, res)=> {
-  
+
      const stations = await Station.find({});
      res.render('Map/sukhumvit', { stations } );
 });
@@ -58,7 +58,7 @@ app.get('/map/sukhumvit', async (req, res)=> {
 app.get('/map/:id', async (req, res) => {
     const station = await Station.findById(req.params.id);
     res.render('./Map/station', {station});
-    
+
 });
 
 app.post('/map/:id/reviews', async(req, res)=> {
